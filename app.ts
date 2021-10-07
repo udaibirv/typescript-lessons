@@ -1,9 +1,27 @@
-function add(n1: number, n2: number){
-  return n1 + n2;
+// const person: {
+//   name: string,
+//   age: number,
+//   hobbies: string[],
+//   role: [number,string] //Tuple declaration (fixed array)
+// } = {
+//   name: 'Udaibir Virk',
+//   age: 24,
+//   hobbies: ['sports', 'video games'],
+//   role: [2, 'author']
+// };
+enum Role {ADMIN, Read_ONLY, AUTHOR};
+
+
+const person = {
+  name: 'Udaibir Virk',
+  age: 24,
+  hobbies: ['sports', 'video games'],
+  role: Role.ADMIN
+};
+console.log(person.name);
+
+for(const hobby of person.hobbies){
+  console.log(hobby);
 }
 
-const number1 = 5;
-const number2 = 2.8;
-
-const result = add(number1, number2);
-console.log(result);
+console.log(Role.ADMIN);
