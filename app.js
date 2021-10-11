@@ -1,16 +1,12 @@
-function add(n1, n2) {
-    return n1 + n2;
+"use strict";
+var userInput; //unknown type
+var userName;
+userInput = 5;
+userInput = 'Max';
+if (typeof userInput === 'string') { //need extra typecheck when assinging unknown to a fixed type
+    userName = userInput;
 }
-function printResult(num) {
-    console.log('Result: ' + num);
+function generateError(message, code) {
+    throw { message: message, errorCode: code };
 }
-function addAndHandle(n1, n2, cb) {
-    var result = n1 + n2;
-    cb(result);
-}
-var combineValues; //function type
-combineValues = add;
-printResult(combineValues(5, 12));
-addAndHandle(10, 20, function (result) {
-    console.log(result);
-});
+generateError('An Error occured!', 500);
