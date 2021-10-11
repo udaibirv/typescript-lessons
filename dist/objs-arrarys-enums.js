@@ -17,15 +17,14 @@ var Role;
     Role[Role["AUTHOR"] = 2] = "AUTHOR";
 })(Role || (Role = {}));
 ;
-var person = {
+const person = {
     name: 'Udaibir Virk',
     age: 24,
     hobbies: ['sports', 'video games'],
     role: Role.ADMIN
 };
 console.log(person.name);
-for (var _i = 0, _a = person.hobbies; _i < _a.length; _i++) {
-    var hobby = _a[_i];
+for (const hobby of person.hobbies) {
     console.log(hobby);
 }
 console.log(Role.ADMIN);

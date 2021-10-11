@@ -1,6 +1,6 @@
 "use strict";
-var userInput; //unknown type
-var userName;
+let userInput; //unknown type
+let userName;
 userInput = 5;
 userInput = 'Max';
 if (typeof userInput === 'string') { //need extra typecheck when assinging unknown to a fixed type
