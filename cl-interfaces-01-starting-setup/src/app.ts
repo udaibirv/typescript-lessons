@@ -11,7 +11,7 @@ activeHobbies.push(...hobbies); //spread operator = pulling out elements in an a
 console.log(activeHobbies);
 
 const person = {
-  name: 'max',
+  firstName: 'max',
   age: 20
 };
 
@@ -24,3 +24,7 @@ const add = (...numbers: number[]) => { // rest paramter to allow for n number o
 }
 
 const addNumbers = add(5, 10, 15, 20);
+
+const [hobby1, hobby2] = hobbies;  // array destructring: goes through hobbies array, stores first element to hobby1 and second element to hobby 2
+
+const {firstName, age} = person //name and person will be stored in their own constants
