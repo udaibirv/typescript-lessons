@@ -1,0 +1,23 @@
+{
+  "name": "typescript-lessons",
+  "version": "1.0.0",
+  "description": "lessons and exercises for typescript based off lectures from udemy",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/udaibirv/typescript-lessons.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/udaibirv/typescript-lessons/issues"
+  },
+  "homepage": "https://github.com/udaibirv/typescript-lessons#readme",
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  }
+}
