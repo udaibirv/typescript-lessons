@@ -4,7 +4,7 @@ class Department{
   protected employees: string[] = [] //an array with string values for Employees
   //private keyword now makes employees array only accessible within Department class (all methods too)
   //protected keywrod makes the variable availaible in any class that extends the Department class
-  constructor(private readonly id: string, public name: string){  //function tied to this class, which is executed when object is being created
+  constructor(protected readonly id: string, public name: string){  //function tied to this class, which is executed when object is being created
     // this.id = id;
     // this.name = n;
   }
@@ -38,6 +38,7 @@ class ITDepartment extends Department{ //inehrits from Department class, gets ev
 
 class AccountingDepartment extends Department{
   private lastReport:string;
+  private static instnace: AccountingDepartment;
 
   get mostRecentReport() { //get is a property where a function is executed when you retrieve a value
     if(this.lastReport){
@@ -52,9 +53,17 @@ class AccountingDepartment extends Department{
     }
     this.addReport(value);
   }
-  constructor(id: string, private reports: string[]){
+  private constructor(id: string, private reports: string[]){
     super(id, 'ACCT')
     this.lastReport = reports[0]
+  }
+
+  static getInstance(){
+    if(AccountingDepartment.instnace){
+      return this.instnace;
+    }
+    this.instnace = new AccountingDepartment('d2', []);
+    return this.instnace;
   }
   addReport(text: string){
     this.reports.push(text);
@@ -71,7 +80,17 @@ class AccountingDepartment extends Department{
     }
     this.employees.push(name);
   }
+
+  describe() {
+    console.log('Accounting Department Id, ' + this.id);
+  }
 }
+
+
+
+
+
+//Instances of classes created above
 
 const employee1 = Department.createEmployee('Udaibir'); //Becasue it is static, can just call it like accessing object property
 console.log(employee1);
@@ -80,22 +99,25 @@ const it = new ITDepartment('d1', ['Max']);
 
 
 
-const accounting = new AccountingDepartment('d2', []);
-accounting.mostRecentReport = 'Most recent end of year report';
-accounting.addReport('Something went wrong. CEO is dodging taxes');
-accounting.addEmployee('Max');
-accounting.addEmployee('Manu');
-accounting.printEmployeeInformation();
+// const accounting = new AccountingDepartment('d2', []);
+const accounting = AccountingDepartment.getInstance();
+console.log(accounting);
+// accounting.mostRecentReport = 'Most recent end of year report';
+// accounting.addReport('Something went wrong. CEO is dodging taxes');
+// accounting.addEmployee('Max');
+// accounting.addEmployee('Manu');
+// accounting.printEmployeeInformation();
+// accounting.describe();
 
-accounting.getReports();
+// accounting.getReports();
 
-it.addEmployee('Max');
-it.addEmployee('Manu');
+// it.addEmployee('Max');
+// it.addEmployee('Manu');
 //Adds new employees to the employee array
 
-it.describe();
-it.printEmployeeInformation();
-console.log(it);
+// it.describe();
+// it.printEmployeeInformation();
+// console.log(it);
 
 // const accountingCopy = {name: 'Finanace', describe: accounting.describe}
 // accountingCopy.describe();
