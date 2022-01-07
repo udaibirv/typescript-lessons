@@ -9,6 +9,10 @@ class Department{
     // this.name = n;
   }
 
+  static createEmployee(name: string){
+    return{name: name}
+  }
+
   describe(this:Department) { //method defined within Department Class. This is passed as parameter which has a type of the class
                               //Will always refer to an isntance of an object which alwasys referring to Department
     console.log(`Department${this.id}): ${this.name}`);
@@ -69,7 +73,12 @@ class AccountingDepartment extends Department{
   }
 }
 
+const employee1 = Department.createEmployee('Udaibir'); //Becasue it is static, can just call it like accessing object property
+console.log(employee1);
+
 const it = new ITDepartment('d1', ['Max']);
+
+
 
 const accounting = new AccountingDepartment('d2', []);
 accounting.mostRecentReport = 'Most recent end of year report';
