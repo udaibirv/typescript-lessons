@@ -1,123 +1,55 @@
-// Code goes here!
-class Department{
+//Interface describes the structure of an ojbect
+//Pure TS feature. Force classes to have certain features, can be used as funtions
+//can use optional parameters or methods using ?
+//Nothing is compiled into vanilla JS
+//Clearly describes the idea of how an object should look like
+//use to describe what an object should look like
+//can only be used for objects
+//no implemtnation details  compared to abstract classes
+//share functionality across different classes, structure (features) of the different classes
 
-  protected employees: string[] = [] //an array with string values for Employees
-  //private keyword now makes employees array only accessible within Department class (all methods too)
-  //protected keywrod makes the variable availaible in any class that extends the Department class
-  constructor(protected readonly id: string, public name: string){  //function tied to this class, which is executed when object is being created
-    // this.id = id;
-    // this.name = n;
-  }
-
-  static createEmployee(name: string){
-    return{name: name}
-  }
-
-  describe(this:Department) { //method defined within Department Class. This is passed as parameter which has a type of the class
-                              //Will always refer to an isntance of an object which alwasys referring to Department
-    console.log(`Department${this.id}): ${this.name}`);
-  }
-
-  addEmployee(employee: string){ //Gets the value passed with this method, and pushes it to employees array defined above
-    this.employees.push(employee);
-  }
-
-  printEmployeeInformation(){
-    console.log(this.employees.length);
-    console.log(this.employees);
-  }
+interface AddFn {
+  (a: number, b:number): number; //interface as an anonymous function
 }
 
-class ITDepartment extends Department{ //inehrits from Department class, gets everything including it's constructor.
-  admins: string[];
-  constructor(id: string, admins: string[]){
-    super(id, 'IT'); //whenever you add new constructor from class that inheirts from a parent, need super();
-    this.admins = admins;
-  }
-}
+let add: AddFn;
 
-class AccountingDepartment extends Department{
-  private lastReport:string;
-  private static instnace: AccountingDepartment;
 
-  get mostRecentReport() { //get is a property where a function is executed when you retrieve a value
-    if(this.lastReport){
-      return this.lastReport;
-    }
-    throw new Error('No Report Found');
-  }
 
-  set mostRecentReport(value: string) {
-    if(!value){
-      throw new Error('Please pass in a valid value!');
-    }
-    this.addReport(value);
-  }
-  private constructor(id: string, private reports: string[]){
-    super(id, 'ACCT')
-    this.lastReport = reports[0]
-  }
-
-  static getInstance(){
-    if(AccountingDepartment.instnace){
-      return this.instnace;
-    }
-    this.instnace = new AccountingDepartment('d2', []);
-    return this.instnace;
-  }
-  addReport(text: string){
-    this.reports.push(text);
-    this.lastReport = text;
-  }
-
-  getReports(){
-    console.log(this.reports);
-  }
-
-  addEmployee(name: string){
-    if(name === 'Max'){
-      return;
-    }
-    this.employees.push(name);
-  }
-
-  describe() {
-    console.log('Accounting Department Id, ' + this.id);
-  }
+interface Named {
+  readonly name?: string;
+  outputName?: string; //? makes the parameter optional
 }
 
 
+interface Greetable extends Named{
+  // readonly name: string; //must only be set once, can't be changed after object intilization
+  // age: number;
 
+  greet(phrase: string):void;
+}
 
+class Person implements Greetable{ //need name and age property, greet method to implement Greetable
+  name?: string;
+  age = 30;
+  constructor(n?: string){
+    if(n){
+      this.name = n;
+    }
+  }
+  greet(phrase: string) {
+    if(this.name){
+      console.log(phrase + ' ' + this.name)
+    }else{
+      console.log('Hi!');
+    }
+  }
+}
 
-//Instances of classes created above
+let user1: Greetable;
 
-const employee1 = Department.createEmployee('Udaibir'); //Becasue it is static, can just call it like accessing object property
-console.log(employee1);
+user1 = new Person();
+console.log(user1);
 
-const it = new ITDepartment('d1', ['Max']);
-
-
-
-// const accounting = new AccountingDepartment('d2', []);
-const accounting = AccountingDepartment.getInstance();
-console.log(accounting);
-// accounting.mostRecentReport = 'Most recent end of year report';
-// accounting.addReport('Something went wrong. CEO is dodging taxes');
-// accounting.addEmployee('Max');
-// accounting.addEmployee('Manu');
-// accounting.printEmployeeInformation();
-// accounting.describe();
-
-// accounting.getReports();
-
-// it.addEmployee('Max');
-// it.addEmployee('Manu');
-//Adds new employees to the employee array
-
-// it.describe();
-// it.printEmployeeInformation();
-// console.log(it);
-
-// const accountingCopy = {name: 'Finanace', describe: accounting.describe}
-// accountingCopy.describe();
+// user1.greet('Hi there- I am');
+// console.log(user1);
