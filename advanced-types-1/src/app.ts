@@ -77,3 +77,36 @@ const useVehicle = (vehicle: Vehicle) => {
 
 useVehicle(v1);
 useVehicle(v2);
+
+
+//discrimnated union type
+//makes implementing type guards easier
+//avaialbe when workign with object types
+
+interface Bird{
+  type: 'bird'; //example of discriminated union; type assignment, narrowed down so that type in this class must be 'bird'
+  flyingSpeed: number;
+}
+
+interface Horse{
+  type: 'horse'; //example of discriminated union; type assignment, narrowed down so that type in this class must be 'horse'
+  runningSpeed: number;
+}
+
+type Animal = Bird | Horse;
+
+const moveAnimal = (animal:Animal) => {
+  let speed;
+  switch(animal.type){
+    case 'bird':
+      speed = animal.flyingSpeed;
+      break;
+    case 'horse':
+      speed = animal.runningSpeed;
+  }
+
+  console.log('Moving at speed: ' + speed);
+
+}
+
+moveAnimal({type: 'bird', flyingSpeed: 10});
